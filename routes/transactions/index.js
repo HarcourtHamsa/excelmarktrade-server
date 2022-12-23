@@ -82,6 +82,53 @@ router.get("/:_id/deposit/history", async (req, res) => {
   }
 });
 
+router.post("/:_id/withdrawal", async (req, res) => {
+  const { _id } = req.params;
+  const { method, address, amount, from } = req.body;
+
+  const user = await UsersDatabase.findOne({ _id });
+
+  if (!user) {
+    res.status(404).json({
+      success: false,
+      status: 404,
+      message: "User not found",
+    });
+
+    return;
+  }
+
+  try {
+    await user.updateOne({
+      withdrawals: [
+        ...user.withdrawals,
+        {
+          method,
+          address,
+          amount,
+          from,
+          status: "Pending",
+        },
+      ],
+    });
+
+    res.status(200).json({
+      success: true,
+      status: 200,
+      message: "Withdrawal request was successful",
+    });
+
+    // sendDepositEmail({
+    //   amount: amount,
+    //   method: method,
+    //   from: from,
+    //   url: url,
+    // });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.get("/:_id/withdrawals/history", async (req, res) => {
   console.log("Withdrawal request from: ", req.ip);
 
