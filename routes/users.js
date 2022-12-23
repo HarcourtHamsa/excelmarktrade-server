@@ -25,7 +25,7 @@ router.get("/:email", async function (req, res, next) {
 
 router.put("/:_id/profile/update", async function (req, res, next) {
   const { _id } = req.params;
-  const userInput = req.body;
+  const {firstName, lastName, email} = req.body;
 
   const user = await UsersDatabase.findOne({ _id: _id });
 
@@ -41,7 +41,9 @@ router.put("/:_id/profile/update", async function (req, res, next) {
 
   try {
     await user.update({
-      ...userInput,
+      firstName,
+      lastName,
+      email
     });
 
     return res.status(200).json({
