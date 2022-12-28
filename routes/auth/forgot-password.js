@@ -16,11 +16,11 @@ router.put("/forgot-password", async function (req, res, next) {
   // send email
 });
 
-router.put("/:email/reset-password", async function (req, res, next) {
-  const { email } = req.params;
+router.put("/:_id/reset-password", async function (req, res, next) {
+  const { _id } = req.params;
   const { password } = req.body;
 
-  const user = await UsersDatabase.findOne({ email });
+  const user = await UsersDatabase.findOne({ _id });
 
   if (!user) {
     res.status(404).json({ message: "user not found" });

@@ -3,7 +3,6 @@ var { hashPassword } = require("../../utils");
 const UsersDatabase = require("../../models/User");
 var router = express.Router();
 
-
 router.post("/register", async (req, res) => {
   const { firstName, lastName, email, password, country } = req.body;
 
@@ -31,7 +30,20 @@ router.post("/register", async (req, res) => {
     referalBonus: 0,
     transactions: [],
     withdrawals: [],
-    accounts: [],
+    accounts: {
+      eth: {
+        address: "",
+      },
+      ltc: {
+        address: "",
+      },
+      btc: {
+        address: "",
+      },
+      usdt: {
+        address: "",
+      },
+    },
     verified: false,
     isDisabled: false,
   })

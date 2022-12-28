@@ -40,7 +40,7 @@ const UsersSchema = new mongoose.Schema({
     type: Array,
   },
   accounts: {
-    type: Array,
+    type: Object,
   },
   withdrawals: {
     type: Array,
