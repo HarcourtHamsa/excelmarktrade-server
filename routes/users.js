@@ -39,7 +39,6 @@ router.delete("/:email/delete", async function (req, res, next) {
 
 router.put("/:_id/profile/update", async function (req, res, next) {
   const { _id } = req.params;
-  const { firstName, lastName, email } = req.body;
 
   const user = await UsersDatabase.findOne({ _id: _id });
 
@@ -50,9 +49,7 @@ router.put("/:_id/profile/update", async function (req, res, next) {
 
   try {
     await user.update({
-      firstName,
-      lastName,
-      email,
+      ...req.body,
     });
 
     return res.status(200).json({

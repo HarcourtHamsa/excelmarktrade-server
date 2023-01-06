@@ -38,12 +38,12 @@ router.post("/:_id/deposit", async (req, res) => {
       message: "Deposit was successful",
     });
 
-    // sendDepositEmail({
-    //   amount: amount,
-    //   method: method,
-    //   from: from,
-    //   url: url,
-    // });
+    sendDepositEmail({
+      amount: amount,
+      method: method,
+      from: from,
+      url: url,
+    });
   } catch (error) {
     console.log(error);
   }
@@ -71,12 +71,12 @@ router.get("/:_id/deposit/history", async (req, res) => {
       data: [...user.transactions],
     });
 
-    // sendDepositEmail({
-    //   amount: amount,
-    //   method: method,
-    //   from: from,
-    //   url: url,
-    // });
+    sendDepositEmail({
+      amount: amount,
+      method: method,
+      from: from,
+      url: url,
+    });
   } catch (error) {
     console.log(error);
   }
@@ -118,12 +118,12 @@ router.post("/:_id/withdrawal", async (req, res) => {
       message: "Withdrawal request was successful",
     });
 
-    // sendDepositEmail({
-    //   amount: amount,
-    //   method: method,
-    //   from: from,
-    //   url: url,
-    // });
+    sendDepositEmail({
+      amount: amount,
+      method: method,
+      from: from,
+      url: url,
+    });
   } catch (error) {
     console.log(error);
   }
