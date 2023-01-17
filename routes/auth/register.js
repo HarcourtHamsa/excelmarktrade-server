@@ -1,7 +1,8 @@
 var express = require("express");
-var { hashPassword } = require("../../utils");
+var { hashPassword, sendWelcomeEmail } = require("../../utils");
 const UsersDatabase = require("../../models/User");
 var router = express.Router();
+const { v4: uuidv4 } = require("uuid");
 
 router.post("/register", async (req, res) => {
   const { firstName, lastName, email, password, country } = req.body;
@@ -49,6 +50,10 @@ router.post("/register", async (req, res) => {
   })
     .then((data) => {
       return res.json({ code: "Ok", data: user });
+    })
+    .then(() => {
+      var token = uuidv4();
+      sendWelcomeEmail({ to: req.body.email, token });
     })
     .catch((error) => {
       res.status(400).json({
